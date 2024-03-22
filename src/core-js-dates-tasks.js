@@ -81,10 +81,8 @@ function getNextFriday(/* date */) {
   // while (currentDate.getDay() !== 5) {
   //   currentDate.setDate(currentDate.getDate() + 1);
   // }
-  // currentDate.setDate(currentDate.getDate() + 7);
-  // currentDate.setHours(0, 0, 0, 0);
 
-  // return currentDate;
+  // return currentDate.toISOString();
 }
 
 /**
@@ -251,8 +249,18 @@ function getWeekNumberByDate(date) {
  * Date(2024, 0, 13) => Date(2024, 8, 13)
  * Date(2023, 1, 1) => Date(2023, 9, 13)
  */
-function getNextFridayThe13th(/* date */) {
-  throw new Error('Not implemented');
+function getNextFridayThe13th(date) {
+  const nextFriday = new Date(date);
+  let acumulator = true;
+
+  while (acumulator) {
+    nextFriday.setDate(nextFriday.getDate() + 1);
+
+    if (nextFriday.getDate() === 13 && nextFriday.getDay() === 5) {
+      acumulator = false;
+    }
+  }
+  return nextFriday;
 }
 
 /**
