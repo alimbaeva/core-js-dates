@@ -76,6 +76,15 @@ function getDayName(date) {
  */
 function getNextFriday(/* date */) {
   throw new Error('Not implemented');
+  // const currentDate = new Date(date);
+
+  // while (currentDate.getDay() !== 5) {
+  //   currentDate.setDate(currentDate.getDate() + 1);
+  // }
+  // currentDate.setDate(currentDate.getDate() + 7);
+  // currentDate.setHours(0, 0, 0, 0);
+
+  // return currentDate;
 }
 
 /**
@@ -152,8 +161,29 @@ function isDateInPeriod(date, period) {
  * '1999-01-05T02:20:00.000Z' => '1/5/1999, 2:20:00 AM'
  * '2010-12-15T22:59:00.000Z' => '12/15/2010, 10:59:00 PM'
  */
-function formatDate(/* date */) {
-  throw new Error('Not implemented');
+function formatDate(date) {
+  const options = {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    timeZone: 'UTC',
+    hour12: true,
+  };
+  const formattedDate = new Date(date);
+  const formattedTimeString = formattedDate.toLocaleTimeString(
+    'en-US',
+    options
+  );
+
+  const dateResult = formattedTimeString.split(',');
+  const timeResult =
+    dateResult[1].trim()[0] === '0'
+      ? dateResult[1].trim().slice(1)
+      : dateResult[1].trim();
+  return `${dateResult[0]}, ${timeResult}`;
 }
 
 /**
